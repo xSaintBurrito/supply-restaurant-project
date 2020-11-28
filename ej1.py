@@ -5,8 +5,15 @@ from flask_api import status
 from flask import request
 import pymysql
 import mysql.connector
+from flask_restful import Api
+
+from createUser import NewUser
 
 app = Flask(__name__)
+api = Api(app)
+
+api.add_resource(NewUser, '/api/user/v1/new')
+
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -55,7 +62,8 @@ def deleteOrder(id):
 def payOrder(id): 
     sql = "INSERT INTO payments (id, cardinfo, prize) VALUES (%s, %s, %s)"
     val = (request.json['id'], request.json['cardinfo'],request.json['prize'])
-  
+    #we should include a column to say if the order is paid or not 
+    #and then make an update 
     mycursor.execute(sql, val)
     mydb.commit()
     mycursor.execute("SELECT * FROM payments")
