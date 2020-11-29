@@ -95,14 +95,11 @@ app.layout = html.Div([
     navbar,
     dbc.Container([
         html.Div(header, id='header_div'),
-        html.Div(
-            [
-                dbc.Row(html.Div(pantry)),
-                dbc.Row(html.Div(orders)),
+        html.Div(pantry, id='pantry_div'),
+        html.Div(orders, id='orders_div'),
             ]
         )
-    ]),
-])
+    ])
 
 
 if __name__ == "__main__":
