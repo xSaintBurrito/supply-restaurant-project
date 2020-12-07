@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Worker from "./Worker"
 class Workers extends Component {
-    state = { workers:this.props.workers  }
+    state = { }
     render() { 
         return  <React.Fragment>
-            {this.state.workers.map(worker =>  <Worker workerStatus= {worker.status} workerName={worker.name} workerId={worker.id}/> )}
+            {this.props.workers.map(worker =>  <Worker workerStatus= {worker.status} workerName={worker.name} workerId={worker.id}/> )}
         </React.Fragment>
     }
 }

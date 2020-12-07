@@ -11,13 +11,22 @@ class LayOut extends Component {
                 ,{name:"Thomas V",id:323,status:"BUSSY"}
                 ,{name:"Alba V",id:897,status:"FREE"}]
      }
+
+     setWorkerStatus = (workerName,status) => {
+         var workersUpdate = this.state.workers;
+         console.log(workerName);
+         console.log(this.state.workers)
+         var workerToUpdate = workersUpdate.find(worker => worker.name == workerName);
+         workerToUpdate.status = status;
+        this.setState({workers:workersUpdate});
+     }
     render() { 
         return <Jumbotron fluid >
         <Container>
         <Row>
         <Col>
             <h1>Active Delivery</h1>
-            <Deliveries workers={this.state.workers} deliveries={this.state.deliveries}/>
+            <Deliveries setWorkerStatus={this.setWorkerStatus} workers={this.state.workers} deliveries={this.state.deliveries}/>
         </Col>
         <Col><h1>Active Delivery Workers</h1>
         <Workers workers={this.state.workers}/>

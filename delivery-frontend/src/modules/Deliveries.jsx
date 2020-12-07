@@ -8,7 +8,7 @@ class Deliveries extends Component {
      }
     render() { 
         return  <React.Fragment>
-            {this.state.deliveries.map(delivery => <OneDelivery id={delivery} workers={this.props.workers} />)}
+            {this.state.deliveries.map(delivery => <OneDelivery setWorkerStatus={this.props.setWorkerStatus} id={delivery} workers={this.props.workers} />)}
         </React.Fragment>
     }
 }

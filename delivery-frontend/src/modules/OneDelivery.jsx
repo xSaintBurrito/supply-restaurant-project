@@ -5,7 +5,18 @@ import Form from "react-bootstrap/Form"
 class OneDelivery extends Component {
     state = {
         deliveryId:this.props.id,
-        deliverStatus:"ACTIVE"
+        deliverStatus:"ACTIVE",
+        choosenWorkerName: "",
+      }
+
+      
+
+      printGetDefaultWorker = (name) => {
+          if(this.props.workers.filter(worker => worker.name != name).filter(worker => worker.status == "FREE")[0]){
+              console.log(this.props.workers.filter(worker => worker.name != name).filter(worker => worker.status == "FREE")[0])
+              return this.props.workers.filter(worker => worker.name != name).filter(worker => worker.status == "FREE")[0].name;
+          }
+          return "";
       }
     
       printStatus = () => {
@@ -21,7 +32,20 @@ class OneDelivery extends Component {
       }
 
       changeStatus = () => {
+          if(!this.state.choosenWorkerName){
+                if(this.printGetDefaultWorker("") == ""){
+                    return;
+                }
+                var backups = this.printGetDefaultWorker("");
+                this.props.setWorkerStatus(backups,"BUSSY")
+          }
+          else{
+            this.props.setWorkerStatus(this.state.choosenWorkerName,"BUSSY")
+          }
           this.setState({deliverStatus:"IN PROGRESS"})
+          this.setState({choosenWorkerName:this.printGetDefaultWorker(this.state.choosenWorkerName)})
+          console.log(this.props.workers);
+          console.log(this.state.choosenWorkerName)
       }
 
       printActiveMenu = () => {
@@ -29,8 +53,8 @@ class OneDelivery extends Component {
           return <React.Fragment>
               <br></br>
             <Form.Label style={{display:"inline-block"}}>Who should be put to this order</Form.Label>
-            <Form.Control style={{width:"20%"}} as="select">
-                {this.props.workers.map(worker => <option>{worker.name}</option>)}
+            <Form.Control style={{width:"20%"}} as="select" onChange={event => {this.setState({choosenWorkerName:event.target.value});console.log(event.target.value)}}>
+                {this.props.workers.filter(worker => worker.status == "FREE").map(worker => <option value={worker.name}>{worker.name}</option>)}
             </Form.Control>
             <br/>
           <Button onClick={() => this.changeStatus()}>Make Delivery</Button>
