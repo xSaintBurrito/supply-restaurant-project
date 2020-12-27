@@ -97,7 +97,77 @@ pantry = dbc.Card(
 )
 
 orders = dbc.Card(
-    html.H1("Orders", style={'textAlign': 'center'}),
+    dbc.Col(
+        [
+        dbc.Row(html.H1("Make an order", style={'textAlign': 'center'})),
+        dbc.Row(
+            html.Div(
+                [
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Tomatoes", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ],
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Potatoes", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ]
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Carrots", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ],
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Lettuces", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ]
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Milks", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ],
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Flours", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ]
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Eggs", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ],
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Beef", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ]
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Chicken", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ],
+                    ),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupAddon(["Fish", dbc.Checkbox()], addon_type="prepend"),
+                            dbc.Input(placeholder="Amount", type="number"),
+                        ]
+                    ),
+                ]
+                )
+            )
+        ]
+    )
 )
 
 app.layout = html.Div([
