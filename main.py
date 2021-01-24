@@ -98,85 +98,146 @@ pantry = dbc.Card(
 
 orders = dbc.Card(
     [
-    dbc.Row(html.H1("Make an order", style={'textAlign': 'center', 'margin-top': '10px', 'margin-bottom': '25px'}), justify="center", align="center", className="h-50"),
-    dbc.Row(
-        [
-            dbc.Col(
-                [
-                    html.Div(
-                        [
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Tomatoes", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ],
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Potatoes", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ]
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Carrots", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ],
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Lettuces", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ]
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Milks", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ],
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Flours", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ]
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Eggs", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ],
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Beef", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ]
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Chicken", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ],
-                            ),
-                            dbc.InputGroup(
-                                [
-                                    dbc.InputGroupAddon(["Fish", dbc.Checkbox()], addon_type="prepend"),
-                                    dbc.Input(placeholder="Amount", type="number"),
-                                ]
-                            ),
-                        ]
-                    )
-                ], width=7),
-            dbc.Col(
-                [
-                   dbc.Button("Place Order", color="info", block=True)
-                ], width=5),
-        ],
-        justify="between",
-    )
+        dbc.Row(html.H1("Make an order", style={'textAlign': 'center', 'margin-top': '10px', 'margin-bottom': '25px'}),
+                justify="center", align="center", className="h-50"),
+        dbc.Row(
+            [
+                dbc.Col(
+                    [
+                        html.Div(
+                            [
+                                dbc.InputGroup(
+                                    [
+                                        dbc.InputGroupAddon(["Tomatoes", dbc.Checkbox()], addon_type="prepend"),
+                                        dbc.Input(placeholder="Amount", type="number"),
+                                    ],
+                                ),
+                                dbc.InputGroup(
+                                    [
+                                        dbc.InputGroupAddon(["Potatoes", dbc.Checkbox()], addon_type="prepend"),
+                                        dbc.Input(placeholder="Amount", type="number"),
+                                    ]
+                                ),
+                                dbc.InputGroup(
+                                    [
+                                        dbc.InputGroupAddon(["Carrots", dbc.Checkbox()], addon_type="prepend"),
+                                        dbc.Input(placeholder="Amount", type="number"),
+                                    ],
+                                ),
+                                dbc.InputGroup(
+                                    [
+                                        dbc.InputGroupAddon(["Lettuces", dbc.Checkbox()], addon_type="prepend"),
+                                        dbc.Input(placeholder="Amount", type="number"),
+                                    ]
+                                ),
+                                dbc.InputGroup(
+                                    [
+                                        dbc.InputGroupAddon(["Milks", dbc.Checkbox()], addon_type="prepend"),
+                                        dbc.Input(placeholder="Amount", type="number"),
+                                    ],
+                                )
+                            ]
+                        )
+                    ], width=4),
+                dbc.Col(
+                    [
+                        dbc.InputGroup(
+                            [
+                                dbc.InputGroupAddon(["Flours", dbc.Checkbox()], addon_type="prepend"),
+                                dbc.Input(placeholder="Amount", type="number"),
+                            ]
+                        ),
+                        dbc.InputGroup(
+                            [
+                                dbc.InputGroupAddon(["Eggs", dbc.Checkbox()], addon_type="prepend"),
+                                dbc.Input(placeholder="Amount", type="number"),
+                            ],
+                        ),
+                        dbc.InputGroup(
+                            [
+                                dbc.InputGroupAddon(["Beef", dbc.Checkbox()], addon_type="prepend"),
+                                dbc.Input(placeholder="Amount", type="number"),
+                            ]
+                        ),
+                        dbc.InputGroup(
+                            [
+                                dbc.InputGroupAddon(["Chicken", dbc.Checkbox()], addon_type="prepend"),
+                                dbc.Input(placeholder="Amount", type="number"),
+                            ],
+                        ),
+                        dbc.InputGroup(
+                            [
+                                dbc.InputGroupAddon(["Fish", dbc.Checkbox()], addon_type="prepend"),
+                                dbc.Input(placeholder="Amount", type="number"),
+                            ]
+                        )
+                    ], width=4),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardBody(
+                                    [
+                                        html.H4("Your product isn't listed?", className="card-title"),
+                                        html.P(
+                                            "No Problem! We can deliver anything after "
+                                            "filling the order form listed below.",
+                                            className="card-text",
+                                        ),
+                                        html.Div(
+                                            [
+                                                dbc.Button("Open Form", id="open_form"),
+                                                dbc.Modal(
+                                                    [
+                                                        dbc.ModalHeader("Order Form"),
+                                                        dbc.ModalBody("This is the content of the modal"),
+                                                        dbc.ModalFooter(
+                                                            dbc.Button("Order!", id="order", className="ml-auto",
+                                                                       block=True)
+                                                        ),
+                                                    ],
+                                                    id="modal",
+                                                ),
+                                            ]
+                                        )
+                                    ]
+                                ),
+                            ],
+                        )
+                    ], width=4)
+            ],
+            justify="between", style={'margin-right': '25px', 'margin-left': '25px'}
+        ),
+        dbc.Row(
+            [
+                dbc.Button("Place Order", id="place_order", color="info", block=True),
+                dbc.Alert("Order placed. The supplier will be informed about the needed roducts", id="order_alert",
+                          is_open=False, dismissable=True, style={'margin-top': '15px', 'margin-bottom': '15px'})
+            ], style={'width': '100%', 'margin-top': '25px', 'margin-bottom': '50px', 'margin-right': '40px', 'margin-left': '40px'}),
     ]
 )
+
+
+@app.callback(
+    Output("modal", "is_open"),
+    [Input("open_form", "n_clicks"), Input("order", "n_clicks")],
+    [State("modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+
+
+@app.callback(
+    Output("order_alert", "is_open"),
+    Input("place_order", "n_clicks"),
+    State("order_alert", "is_open")
+)
+def send_orders(clicked, is_open):
+    if clicked:
+        return not is_open
+    return is_open
+
 
 app.layout = html.Div([
     navbar,
