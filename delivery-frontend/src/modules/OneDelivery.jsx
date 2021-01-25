@@ -37,10 +37,10 @@ class OneDelivery extends Component {
                     return;
                 }
                 var backups = this.printGetDefaultWorker("");
-                this.props.setWorkerStatus(backups,"BUSSY")
+                this.props.setWorkerStatus(backups,"BUSY")
           }
           else{
-            this.props.setWorkerStatus(this.state.choosenWorkerName,"BUSSY")
+            this.props.setWorkerStatus(this.state.choosenWorkerName,"BUSY")
           }
           this.setState({deliverStatus:"IN PROGRESS"})
           this.setState({choosenWorkerName:this.printGetDefaultWorker(this.state.choosenWorkerName)})

@@ -7,11 +7,11 @@ class Worker extends Component {
         workerId:this.props.workerId,
         workerName:this.props.workerName,
         workerStatus:this.props.workerStatus,
-        isWorkerBussy:false
+        isWorkerBUSY:false
       }
     printWorkerStats = (status) => {
-        if(status == "BUSSY"){
-            return <span style={{color:"red"}}> BUSSY</span>
+        if(status == "BUSY"){
+            return <span style={{color:"red"}}> BUSY</span>
         }
         return <span style={{color:"green"}}> FREE</span>
     }
