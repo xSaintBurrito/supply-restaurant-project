@@ -109,7 +109,7 @@ class LayOut extends Component {
             <h1>Active Delivery</h1>
             <Button style={{marginRight:10}} onClick={() => this.getDeliveries()}>Refresh Deliveries</Button>
             <Button style={{marginRight:10}} onClick={() => this.postDeliveries()}>Post Deliveries</Button>
-            <Button style={{marginRight:10}} onClick={() => this.refreshDeliveries()}>Refresh Deliveries</Button>
+            <Button style={{marginRight:10}} onClick={() => this.refreshDeliveries()}>Refresh Date</Button>
             <Deliveries setDeliveryStatus={this.setDeliveryStatus} setWorkerStatus={this.setWorkerStatus} workers={this.state.workers} deliveries={this.state.deliveries}/>
         </Col>
         <Col>
