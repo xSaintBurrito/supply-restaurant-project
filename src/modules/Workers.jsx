@@ -4,7 +4,7 @@ class Workers extends Component {
     state = { }
     render() { 
         return  <React.Fragment>
-            {this.props.workers.map(worker =>  <Worker workerStatus= {worker.status} workerName={worker.name} workerId={worker.id}/> )}
+            {this.props.workers.map(worker =>  <Worker workerStatus={worker.status} workerName={worker.name} workerId={worker.id}/> )}
         </React.Fragment>
     }
 }

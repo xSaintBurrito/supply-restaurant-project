@@ -39,7 +39,6 @@ class LayOut extends Component {
           axios.get('https://delivery-app-backend-x.herokuapp.com/workers')
           .then((response) => {
               var workers_ = response.data.workers;
-              console.log(response.data.workers)
               var newWorkers = [];
               for(var worker of workers_){
                   console.log(worker)
@@ -62,42 +61,65 @@ class LayOut extends Component {
 
      setWorkerStatus = (workerName,status) => {
          var workersUpdate = this.state.workers;
-         console.log(workerName);
-         console.log(this.state.workers)
          var workerToUpdate = workersUpdate.find(worker => worker.name == workerName);
          workerToUpdate.status = status;
         this.setState({workers:workersUpdate});
+        this.postWorkers();
      }
-     setDeliveryStatus = (deliveryId,status) => {
+     setDeliveryStatus = (deliveryId,status,choosenWorkerName) => {
         var deliveryUpdate = this.state.deliveries;
-        console.log(deliveryId);
-        console.log(this.state.deliveries)
-        console.log(status)
         var deliveryToUpdate = deliveryUpdate.find(delivery => delivery.id == deliveryId);
         deliveryToUpdate.status = status;
         if(status == "IN PROGRESS"){
             var dateNow = new Date();
-            var date = new Date(dateNow.getTime() + Math.round(Math.random() * 30)*60000);
+            var date = new Date(dateNow.getTime() + Math.round(Math.random() * 2)*60000);
             deliveryToUpdate.completionTime = date.getHours() + ":" + date.getMinutes()
+            console.log(choosenWorkerName)
+            deliveryToUpdate.choosenWorkerName = choosenWorkerName;
         }
         if(status == "DONE"){
             deliveryToUpdate.completionTime = "";
-        }
+            deliveryToUpdate.choosenWorkerName = "";
+        } 
         
         this.setState({deliveries:deliveryUpdate});
+        this.postDeliveries();
     }
     refreshDeliveries = () => {
         var now = new Date();
         for(var delivery of this.state.deliveries){
+          if(delivery.choosenWorkerName == "" ||delivery.choosenWorkerName == null ){
+            continue;
+          }
+          
             if(delivery.completionTime.split(":")[0] < now.getHours() ){
+              if(delivery.completionTime != "" ||delivery.completionTime != null ){
+                this.setWorkerStatus(delivery.choosenWorkerName,"FREE");
+              }
                 this.setDeliveryStatus(delivery.id,"DONE");
             }
             if(delivery.completionTime.split(":")[0] == now.getHours() ){
                 if(delivery.completionTime.split(":")[1] < now.getMinutes()){
+                  if(delivery.completionTime != "" ||delivery.completionTime != null ){
+                    this.setWorkerStatus(delivery.choosenWorkerName,"FREE");
+                  }
                     this.setDeliveryStatus(delivery.id,"DONE");
                 }
             }
         }
+      this.postDeliveries();
+    }
+
+    componentDidMount() {
+      //this.intervalRefreshDeliveries = setInterval(() => this.refreshDeliveries(), 1000);
+      this.intervalRefreshWorkers = setInterval(() => this.getWorkers(), 2000);
+      this.intervalRefreshDeliveries2 = setInterval(() => this.getDeliveries(), 2000);
+    }
+    componentWillUnmount() {
+      //clearInterval(this.intervalRefreshDeliveries);
+      clearInterval(this.intervalRefreshWorkers);
+      clearInterval(this.intervalRefreshDeliveries2);
+      
     }
 
 
@@ -107,16 +129,11 @@ class LayOut extends Component {
         <Row>
         <Col>
             <h1>Active Delivery</h1>
-            <Button style={{marginRight:10}} onClick={() => this.getDeliveries()}>Refresh Deliveries</Button>
-            <Button style={{marginRight:10}} onClick={() => this.postDeliveries()}>Post Deliveries</Button>
             <Button style={{marginRight:10}} onClick={() => this.refreshDeliveries()}>Refresh Date</Button>
             <Deliveries setDeliveryStatus={this.setDeliveryStatus} setWorkerStatus={this.setWorkerStatus} workers={this.state.workers} deliveries={this.state.deliveries}/>
         </Col>
         <Col>
-        <h1>Active Delivery Workers</h1>
-        <Button style={{marginRight:10}} onClick={() => this.getWorkers()}>Refresh Workers</Button>
-        <Button style={{marginRight:10}} onClick={() => this.postWorkers()}>Post Workers</Button>
-            
+        <h1>Active Delivery Workers</h1>    
         <Workers workers={this.state.workers}/>
         </Col>
         </Row>

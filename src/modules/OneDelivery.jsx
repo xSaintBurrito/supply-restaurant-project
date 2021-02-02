@@ -40,7 +40,7 @@ class OneDelivery extends Component {
           else{
             this.props.setWorkerStatus(this.state.choosenWorkerName,"BUSY")
           }
-          this.props.setDeliveryStatus(this.props.id,"IN PROGRESS")
+          this.props.setDeliveryStatus(this.props.id,"IN PROGRESS",this.state.choosenWorkerName)
           this.setState({deliverStatus:"IN PROGRESS"})
           this.setState({choosenWorkerName:this.printGetDefaultWorker(this.state.choosenWorkerName)})
           console.log(this.props.workers);
